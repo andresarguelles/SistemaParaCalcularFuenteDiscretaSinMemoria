@@ -15,7 +15,7 @@ Al calcular la entropía de un texto, podemos obtener una medida de cuánta info
 
 ## 🚀 Uso
 
-Para usar este programa, simplemente necesitas tener un archivo de texto o un documento de Word con el texto del que deseas calcular la entropía. El programa leerá el archivo, calculará la probabilidad de cada símbolo, y luego usará esa información para calcular la entropía, la información total, la redundancia y la eficiencia.
+Para usar este programa, simplemente necesitas modificar el archivo de texto ubicado en la ruta: "src/doc". El programa leerá el archivo y lo usará como la "fuente de memoria nula", luego, calculará el total de simbolos, la aparicicion de cada símbolo, con ello la probabiliidad de aparicion de cada simbolo y por ultimo usará esa información para calcular la entropía, la información total, la redundancia y la eficiencia.
 
 ## 📝 Licencia
 
