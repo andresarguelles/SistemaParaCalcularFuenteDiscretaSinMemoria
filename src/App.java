@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.*;
 
 public class App {
@@ -63,23 +64,33 @@ public class App {
         System.out.println("La eficiencia es: " + String.format("%.3f", eficiencia) + "%");
     }
 
-    public static void main(String[] args) {
-        // Verificar si el usuario ingresó algo
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Ingresa el mensaje: ");
-            String mensaje;
-            mensaje = scanner.nextLine();
+public static void main(String[] args) {
+    try {
+        File file = new File("src\\doc\\Prueba.txt");
+        Scanner scanner = new Scanner(file);
+        System.out.println("Leyendo el mensaje desde el archivo...");
+        StringBuilder mensaje = new StringBuilder();
+
+        if (scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
+                mensaje.append(scanner.nextLine());
+                mensaje.append(" ");
+            }
+            System.out.println("Mensaje: " + mensaje);
             totalSimbolos = mensaje.length();
-            calculaCoincidenciaDeCadaSimbolo(mensaje);
+            calculaCoincidenciaDeCadaSimbolo(mensaje.toString());
             calcularProbabilidadDeCadaSimbolo();
             System.out.println("\n\nTotal de símbolos: " + totalSimbolos);
             calcularEntropia();
             calcularInformacionTotal();
             calcularRedundancia();
             calcularEficiencia();
-        } catch (Exception e) {
-            System.out.println("No ingresaste ningún mensaje.");
+        } else {
+            System.out.println("El archivo está vacío.");
         }
-
+        scanner.close();
+    } catch (Exception e) {
+        System.out.println("Ocurrió un error al leer el archivo: " + e.getMessage());
     }
+}
 }

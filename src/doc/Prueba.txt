@@ -1,0 +1,2 @@
+Hola chiques, que haciendo?, se supone que esto es lo que tiene que leer el programa
+veamos si hace también saltos de linea
