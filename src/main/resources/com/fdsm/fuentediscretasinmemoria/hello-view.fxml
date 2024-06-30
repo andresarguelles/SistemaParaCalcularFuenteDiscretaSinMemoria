@@ -2,15 +2,99 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.fdsm.fuentediscretasinmemoria.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fdsm.fuentediscretasinmemoria.HelloController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Bienvenido a CFDSM" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Label>
+      <TableView fx:id="tablaDeSimbolos" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <columns>
+            <TableColumn fx:id="simbolo" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Simbolo" />
+            <TableColumn fx:id="frecuencia" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Frecuencia" />
+            <TableColumn fx:id="probabilidad" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Probabilidad" />
+        </columns>
+      </TableView>
+      <HBox alignment="TOP_CENTER" layoutX="24.0" layoutY="87.2" prefHeight="164.0" prefWidth="228.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="87.0">
+         <children>
+             <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="227.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
+                 <children>
+                     <Label text="Total de simbolos">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label text="Entropia">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label text="Informacion total">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label text="Redundancia">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label text="Eficiencia">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                 </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+             </VBox>
+            <VBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="164.0" prefWidth="162.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
+                 <children>
+                     <Label fx:id="cantidadSimbolos" text="#s">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label fx:id="cantidadEntropia" text="hx">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label fx:id="cantidadInformacion" text="ti">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label fx:id="cantidadRedundancia" text="r">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                     <Label fx:id="cantidadEficiencia" text="e">
+                         <font>
+                             <Font name="Consolas" size="12.0" />
+                         </font>
+                     </Label>
+                 </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+             </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

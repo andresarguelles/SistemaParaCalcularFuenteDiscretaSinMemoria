@@ -2,7 +2,8 @@ package com.fdsm.fuentediscretasinmemoria;
 import java.io.File;
 import java.util.*;
 
-public class MainCode {
+public class MainData {
+    public static List<Simbolo> listaDeSimbolos = new ArrayList<>();
     public static Map<Character, Integer> registroDeSimbolos = new HashMap<>();
     public static Map<Character, Double> registroDeProbabilidadDeSimbolos = new HashMap<>();
     public static int totalSimbolos = 0;
@@ -24,6 +25,7 @@ public class MainCode {
 
     public static void calcularProbabilidadDeCadaSimbolo() {
         for (Map.Entry<Character, Integer> entry : registroDeSimbolos.entrySet()) {
+            listaDeSimbolos.add(new Simbolo(entry.getKey(), entry.getValue(), (double) entry.getValue() / totalSimbolos));
             registroDeProbabilidadDeSimbolos.put(entry.getKey(), (double) entry.getValue() / totalSimbolos);
         }
         System.out.println("\nRegistro de probabilidad de símbolos\n");
@@ -65,7 +67,7 @@ public class MainCode {
         System.out.println("La eficiencia es: " + String.format("%.3f", eficiencia) + "%");
     }
 
-    public static void main(String[] args) {
+    public static List<Simbolo> obtenerDatos() {
         try {
             File file = new File("src\\main\\java\\com\\fdsm\\fuentediscretasinmemoria\\doc\\Prueba.txt");
             Scanner scanner = new Scanner(file);
@@ -86,12 +88,15 @@ public class MainCode {
                 calcularInformacionTotal();
                 calcularRedundancia();
                 calcularEficiencia();
+
             } else {
                 System.out.println("El archivo está vacío.");
             }
             scanner.close();
+            return listaDeSimbolos;
         } catch (Exception e) {
             System.out.println("Ocurrió un error al leer el archivo: " + e.getMessage());
         }
+        return null;
     }
 }
