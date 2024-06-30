@@ -1,7 +1,8 @@
+package com.fdsm.fuentediscretasinmemoria;
 import java.io.File;
 import java.util.*;
 
-public class App {
+public class MainCode {
     public static Map<Character, Integer> registroDeSimbolos = new HashMap<>();
     public static Map<Character, Double> registroDeProbabilidadDeSimbolos = new HashMap<>();
     public static int totalSimbolos = 0;
@@ -64,33 +65,33 @@ public class App {
         System.out.println("La eficiencia es: " + String.format("%.3f", eficiencia) + "%");
     }
 
-public static void main(String[] args) {
-    try {
-        File file = new File("src\\doc\\Prueba.txt");
-        Scanner scanner = new Scanner(file);
-        System.out.println("Leyendo el mensaje desde el archivo...");
-        StringBuilder mensaje = new StringBuilder();
+    public static void main(String[] args) {
+        try {
+            File file = new File("src\\main\\java\\com\\fdsm\\fuentediscretasinmemoria\\doc\\Prueba.txt");
+            Scanner scanner = new Scanner(file);
+            System.out.println("Leyendo el mensaje desde el archivo...");
+            StringBuilder mensaje = new StringBuilder();
 
-        if (scanner.hasNextLine()) {
-            while (scanner.hasNextLine()) {
-                mensaje.append(scanner.nextLine());
-                mensaje.append(" ");
+            if (scanner.hasNextLine()) {
+                while (scanner.hasNextLine()) {
+                    mensaje.append(scanner.nextLine());
+                    mensaje.append(" ");
+                }
+                System.out.println("Mensaje: " + mensaje);
+                totalSimbolos = mensaje.length();
+                calculaCoincidenciaDeCadaSimbolo(mensaje.toString());
+                calcularProbabilidadDeCadaSimbolo();
+                System.out.println("\n\nTotal de símbolos: " + totalSimbolos);
+                calcularEntropia();
+                calcularInformacionTotal();
+                calcularRedundancia();
+                calcularEficiencia();
+            } else {
+                System.out.println("El archivo está vacío.");
             }
-            System.out.println("Mensaje: " + mensaje);
-            totalSimbolos = mensaje.length();
-            calculaCoincidenciaDeCadaSimbolo(mensaje.toString());
-            calcularProbabilidadDeCadaSimbolo();
-            System.out.println("\n\nTotal de símbolos: " + totalSimbolos);
-            calcularEntropia();
-            calcularInformacionTotal();
-            calcularRedundancia();
-            calcularEficiencia();
-        } else {
-            System.out.println("El archivo está vacío.");
+            scanner.close();
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al leer el archivo: " + e.getMessage());
         }
-        scanner.close();
-    } catch (Exception e) {
-        System.out.println("Ocurrió un error al leer el archivo: " + e.getMessage());
     }
-}
 }
