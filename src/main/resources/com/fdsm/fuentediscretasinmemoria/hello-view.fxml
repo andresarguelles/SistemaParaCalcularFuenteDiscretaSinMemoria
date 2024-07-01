@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,20 +10,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fdsm.fuentediscretasinmemoria.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="200.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fdsm.fuentediscretasinmemoria.HelloController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Bienvenido a CFDSM" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" text="Bienvenido a CFDSM" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Label>
-      <TableView fx:id="tablaDeSimbolos" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+      <TableView fx:id="tablaDeSimbolos" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
         <columns>
             <TableColumn fx:id="simbolo" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Simbolo" />
             <TableColumn fx:id="frecuencia" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Frecuencia" />
             <TableColumn fx:id="probabilidad" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Probabilidad" />
         </columns>
       </TableView>
-      <HBox alignment="TOP_CENTER" layoutX="24.0" layoutY="87.2" prefHeight="164.0" prefWidth="228.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="87.0">
+      <HBox alignment="TOP_CENTER" layoutX="11.0" layoutY="222.0" prefHeight="164.0" prefWidth="228.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.599999999999994" AnchorPane.topAnchor="222.0">
          <children>
              <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="227.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
                  <children>
@@ -96,5 +97,8 @@
              </VBox>
          </children>
       </HBox>
+      <Label layoutX="39.0" layoutY="108.0" text="Seleccione archivo" />
+      <Button fx:id="btnBuscar" layoutX="200.0" layoutY="102.0" mnemonicParsing="false" onAction="#obtenerDireccion" text="Buscar..." />
+      <Button fx:id="btnCalcular" layoutX="297.0" layoutY="102.0" mnemonicParsing="false" onAction="#calcularDatos" text="Calcular" />
    </children>
 </AnchorPane>

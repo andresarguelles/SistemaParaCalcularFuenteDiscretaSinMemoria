@@ -12,6 +12,7 @@ public class MainData {
     public static double informacionTotal = 0;
     public static double redundancia = 0;
     public static double eficiencia = 0;
+    public static String direccion = "src\\main\\java\\com\\fdsm\\fuentediscretasinmemoria\\doc\\Prueba.txt";
 
 
     public static void calculaCoincidenciaDeCadaSimbolo(String mensaje) {
@@ -67,9 +68,19 @@ public class MainData {
         System.out.println("La eficiencia es: " + String.format("%.3f", eficiencia) + "%");
     }
 
+
     public static List<Simbolo> obtenerDatos() {
+        listaDeSimbolos.clear();
+        registroDeSimbolos.clear();
+        registroDeProbabilidadDeSimbolos.clear();
+        totalSimbolos = 0;
+        entropia = 0;
+        informacionTotal = 0;
+        redundancia = 0;
+        eficiencia = 0;
+
         try {
-            File file = new File("src\\main\\java\\com\\fdsm\\fuentediscretasinmemoria\\doc\\Prueba.txt");
+            File file = new File(direccion);
             Scanner scanner = new Scanner(file);
             System.out.println("Leyendo el mensaje desde el archivo...");
             StringBuilder mensaje = new StringBuilder();

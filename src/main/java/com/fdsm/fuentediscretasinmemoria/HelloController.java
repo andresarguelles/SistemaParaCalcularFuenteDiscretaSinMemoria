@@ -2,13 +2,15 @@ package com.fdsm.fuentediscretasinmemoria;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -41,14 +43,36 @@ public class HelloController implements Initializable {
     @FXML
     private Label cantidadEficiencia;
 
+    @FXML
+    private TextArea cuadroTexto;
+
+    @FXML
+    void obtenerDireccion(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Archivos de texto", "*.txt")
+        );
+        Stage stage = (Stage) tablaDeSimbolos.getScene().getWindow(); // Obtener la ventana principal
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if(selectedFile!=null){
+            MainData.direccion = selectedFile.getAbsolutePath();
+        }
+        System.out.println(MainData.direccion);
+    }
 
 
-    ObservableList<Simbolo> listaDeSimbolos = FXCollections.observableArrayList(
-         Objects.requireNonNull(MainData.obtenerDatos())
-    );
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    void calcularDatos(ActionEvent event) {
+        initData();
+    }
+
+
+    private void initData(){
+        ObservableList<Simbolo> listaDeSimbolos = FXCollections.observableArrayList(
+                Objects.requireNonNull(MainData.obtenerDatos())
+        );
         simbolo.setCellValueFactory(new PropertyValueFactory<Simbolo, Character>("simbolo"));
         frecuencia.setCellValueFactory(new PropertyValueFactory<Simbolo, Integer>("frecuencia"));
         probabilidad.setCellValueFactory(new PropertyValueFactory<Simbolo, Double>("probabilidad"));
@@ -59,6 +83,10 @@ public class HelloController implements Initializable {
         cantidadRedundancia.setText(String.format("%.3f", MainData.redundancia));
         cantidadEficiencia.setText(String.format("%.3f", MainData.eficiencia));
         tablaDeSimbolos.setItems(listaDeSimbolos);
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initData();
     }
 }
