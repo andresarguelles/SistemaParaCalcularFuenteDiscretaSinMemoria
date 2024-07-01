@@ -90,6 +90,7 @@ public class MainData {
                     mensaje.append(scanner.nextLine());
                     mensaje.append(" ");
                 }
+                mensaje.deleteCharAt(mensaje.length() - 1);
                 System.out.println("Mensaje: " + mensaje);
                 totalSimbolos = mensaje.length();
                 calculaCoincidenciaDeCadaSimbolo(mensaje.toString());
