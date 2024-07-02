@@ -1,0 +1,13 @@
+.label{
+    -fx-font-size: 12;
+    -fx-font-family: Consolas;
+}
+
+.button{
+    -fx-font-size: 12;
+    -fx-font-family: Consolas;
+}
+
+#alertaArchivo{
+    -fx-text-fill: red;
+}
