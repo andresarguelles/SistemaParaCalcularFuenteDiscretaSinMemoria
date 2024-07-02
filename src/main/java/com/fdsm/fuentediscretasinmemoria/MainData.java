@@ -12,7 +12,7 @@ public class MainData {
     public static double informacionTotal = 0;
     public static double redundancia = 0;
     public static double eficiencia = 0;
-    public static String direccion = "src\\main\\java\\com\\fdsm\\fuentediscretasinmemoria\\doc\\Prueba.txt";
+    public static String direccion;
 
 
     public static void calculaCoincidenciaDeCadaSimbolo(String mensaje) {
@@ -20,8 +20,6 @@ public class MainData {
             char letra = mensaje.charAt(i);
             registroDeSimbolos.put(letra, registroDeSimbolos.getOrDefault(letra, 0) + 1);
         }
-        System.out.println("\nRegistro de símbolos\n");
-        System.out.println(registroDeSimbolos);
     }
 
     public static void calcularProbabilidadDeCadaSimbolo() {
@@ -29,15 +27,6 @@ public class MainData {
             listaDeSimbolos.add(new Simbolo(entry.getKey(), entry.getValue(), (double) entry.getValue() / totalSimbolos));
             registroDeProbabilidadDeSimbolos.put(entry.getKey(), (double) entry.getValue() / totalSimbolos);
         }
-        System.out.println("\nRegistro de probabilidad de símbolos\n");
-        System.out.print("{");
-        int contadorDeLineas = 0;
-        for (Map.Entry<Character, Double> entry : registroDeProbabilidadDeSimbolos.entrySet()) {
-            System.out.print(entry.getKey() + "=" + String.format("%.3f", entry.getValue())+ ", ");
-            if(++contadorDeLineas % 12 == 0)
-                System.out.println();
-        }
-        System.out.print("\b\b}");
     }
 
     public static void calcularEntropia() {
@@ -45,7 +34,6 @@ public class MainData {
             double probabilidad = entry.getValue();
             entropia += probabilidad * (Math.log(1/probabilidad) / Math.log(2));
         }
-        System.out.println("La entropía es: " + String.format("%.3f", entropia) + " bits/símbolo");
     }
 
     public static void calcularInformacionTotal(){
@@ -53,23 +41,19 @@ public class MainData {
             double probabilidad = entry.getValue();
             informacionTotal += Math.log(1/probabilidad) / Math.log(2);
         }
-        System.out.println("La información total es: " + String.format("%.3f", informacionTotal) + " bits");
     }
 
     public static void calcularRedundancia(){
         entropiaMaxima = Math.log(totalSimbolos) / Math.log(2);
         redundancia = 1 - (entropia/ entropiaMaxima);
         redundancia *=100;
-        System.out.println("La redundancia es: " + String.format("%.3f", redundancia) + "%" );
     }
 
     public static void calcularEficiencia(){
         eficiencia = (entropia / entropiaMaxima) * 100;
-        System.out.println("La eficiencia es: " + String.format("%.3f", eficiencia) + "%");
     }
 
-
-    public static List<Simbolo> obtenerDatos() {
+    public static void borrarDatos(){
         listaDeSimbolos.clear();
         registroDeSimbolos.clear();
         registroDeProbabilidadDeSimbolos.clear();
@@ -78,7 +62,11 @@ public class MainData {
         informacionTotal = 0;
         redundancia = 0;
         eficiencia = 0;
+    }
 
+
+    public static List<Simbolo> obtenerDatos() {
+        borrarDatos();
         try {
             File file = new File(direccion);
             Scanner scanner = new Scanner(file);
@@ -91,18 +79,16 @@ public class MainData {
                     mensaje.append(" ");
                 }
                 mensaje.deleteCharAt(mensaje.length() - 1);
-                System.out.println("Mensaje: " + mensaje);
+
                 totalSimbolos = mensaje.length();
                 calculaCoincidenciaDeCadaSimbolo(mensaje.toString());
                 calcularProbabilidadDeCadaSimbolo();
-                System.out.println("\n\nTotal de símbolos: " + totalSimbolos);
                 calcularEntropia();
                 calcularInformacionTotal();
                 calcularRedundancia();
                 calcularEficiencia();
-
             } else {
-                System.out.println("El archivo está vacío.");
+                return null;
             }
             scanner.close();
             return listaDeSimbolos;

@@ -1,5 +1,6 @@
 package com.fdsm.fuentediscretasinmemoria;
 
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +45,9 @@ public class HelloController implements Initializable {
     private Label cantidadEficiencia;
 
     @FXML
+    private Label alertaArchivo;
+
+    @FXML
     private TextArea cuadroTexto;
 
     @FXML
@@ -52,7 +56,13 @@ public class HelloController implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Archivos de texto", "*.txt")
         );
-        Stage stage = (Stage) tablaDeSimbolos.getScene().getWindow(); // Obtener la ventana principal
+
+        File initialDirectory = new File("src/main/java/com/fdsm/fuentediscretasinmemoria/doc");
+        if(initialDirectory.exists()){
+            fileChooser.setInitialDirectory(initialDirectory);
+        }
+
+        Stage stage = (Stage) tablaDeSimbolos.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if(selectedFile!=null){
@@ -70,6 +80,15 @@ public class HelloController implements Initializable {
 
 
     private void initData(){
+        if(MainData.direccion == null){
+            alertaArchivo.setText("Por favor, seleccione un archivo");
+            alertaArchivo.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(javafx.util.Duration.seconds(2));
+            visiblePause.setOnFinished(e -> alertaArchivo.setVisible(false));
+            visiblePause.play();
+            return;
+        }
+
         ObservableList<Simbolo> listaDeSimbolos = FXCollections.observableArrayList(
                 Objects.requireNonNull(MainData.obtenerDatos())
         );
@@ -80,13 +99,13 @@ public class HelloController implements Initializable {
         cantidadSimbolos.setText(String.valueOf(MainData.totalSimbolos));
         cantidadEntropia.setText(String.format("%.3f", MainData.entropia) + " bits/símbolo");
         cantidadInformacion.setText(String.format("%.3f", MainData.informacionTotal) + " bits");
-        cantidadRedundancia.setText(String.format("%.3f", MainData.redundancia));
-        cantidadEficiencia.setText(String.format("%.3f", MainData.eficiencia));
+        cantidadRedundancia.setText(String.format("%.3f", MainData.redundancia) + "%");
+        cantidadEficiencia.setText(String.format("%.3f", MainData.eficiencia) + "%");
         tablaDeSimbolos.setItems(listaDeSimbolos);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initData();
+        //initData();
     }
 }
